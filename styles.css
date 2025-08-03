@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    font-family: Impact, sans-serif;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Top progress bar */
+.seconds-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background: white;
+    width: 0%;
+    transition: width 1s linear;
+}
+
+/* Date in top-left */
+.date-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 10px;
+}
+
+/* Centered time text */
+.time-container {
+    text-align: center;
+    font-size: 2.5rem;
+    padding: 20px;
+}
+
+.fade {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.fade.fade-out {
+    opacity: 0;
+}
+/* Container styling */
+.Stopwatch-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    font-family: impact, sans-serif;
+    padding: 20px;
+    background-color: black;
+    border-radius: 12px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Stopwatch display */
+.stopwatch {
+    font-size: 25px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* Button base styling */
+.Stopwatch-container button {
+    font-size: 20px;
+    padding: 10px 24px;
+    margin: 5px;
+    width: 150px;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-family: Impact, sans-serif;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    transition: background-color 0.2s ease-in-out;
+}
+
+
+/* Start button */
+#start {
+    background-color: black;
+    color: white;
+}
+
+#start:hover {
+    background-color: limegreen;
+    color: black;
+
+}
+
+/* Pause button */
+#reset {
+    background-color: black;
+    color: white;
+}
+
+#reset:hover {
+    background-color: red;
+    color: black;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+
