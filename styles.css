@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +8,7 @@
 
 body {
     background-color: black;
-    font-family: Impact, sans-serif;
+    font-family: Lexend, sans-serif;
     color: white;
     height: 100vh;
     display: flex;
@@ -57,7 +59,7 @@ body {
     align-items: center;
     justify-content: center;
     margin-top: 40px;
-    font-family: impact, sans-serif;
+    font-family: Lexend, sans-serif;
     padding: 20px;
     background-color: black;
     border-radius: 12px;
@@ -80,7 +82,7 @@ body {
     width: 150px;
     border: 2px solid white;
     border-radius: 8px;
-    font-family: Impact, sans-serif;
+    font-family: Lexend, sans-serif;
     cursor: pointer;
     background-color: transparent;
     color: white;
