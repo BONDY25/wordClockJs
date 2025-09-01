@@ -156,8 +156,9 @@ body {
 /* Stopwatch display */
 .stopwatch {
     font-size: 25px;
-    color: white;
     margin-bottom: 20px;
+    background-color: var(--bgColor);
+    color: var(--fontColor);
 }
 
 /* Button base styling */
