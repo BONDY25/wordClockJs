@@ -6,6 +6,39 @@ const secondsBar = document.querySelector('.seconds-bar');
 const stopwatchDisplay = document.getElementById('stopwatch');
 const startButton = document.getElementById('start');
 const resetButton = document.getElementById('reset');
+const settingsBtn = document.getElementById('settings');
+const settingsPanel = document.getElementById('settings-panel');
+const fontSelect = document.getElementById('font-select');
+const themeSelect = document.getElementById('theme-select');
+
+// =========================================================================================
+// Settings Panel
+// =========================================================================================
+
+// Settings Button -----------------------------------------------------------------------
+settingsBtn.addEventListener('click', () => {
+    settingsPanel.classList.toggle('open');
+    settingsBtn.parentElement.classList.toggle('open'); // shift button too
+});
+
+// Font Select -----------------------------------------------------------------------
+fontSelect.addEventListener('change', (e) => {
+    document.documentElement.style.setProperty(
+        '--defFont',
+        `${e.target.value}, sans-serif`
+    );
+});
+
+// Theme Select -----------------------------------------------------------------------
+themeSelect.addEventListener('change', (e) => {
+    if (e.target.value === "Light") {
+        document.documentElement.style.setProperty("--bgColor", "white");
+        document.documentElement.style.setProperty("--fontColor", "black");
+    } else {
+        document.documentElement.style.setProperty("--bgColor", "black");
+        document.documentElement.style.setProperty("--fontColor", "white");
+    }
+});
 
 // =========================================================================================
 // Stop watch Functions
@@ -27,24 +60,23 @@ function formatTime(ms) {
 
 // Update Display -------------------------------------------------------------------------------
 function updateDisplay() {
-    if (timeElapsed===0) {
+    if (timeElapsed === 0) {
         stopwatchDisplay.textContent = "Press Start"
-    }
-    else{
+    } else {
         stopwatchDisplay.textContent = formatTime(timeElapsed);
     }
 }
 
 // Start Stopwatch -------------------------------------------------------------------------------
 function startStopwatch() {
-    startTime = Date.now()-timeElapsed;
+    startTime = Date.now() - timeElapsed;
     timeInterval = setInterval(() => {
-        timeElapsed  = Date.now() - startTime;
+        timeElapsed = Date.now() - startTime;
         updateDisplay();
     }, 100);
     isRunning = true;
     startButton.textContent = "Pause";
-    resetButton.disabled= false;
+    resetButton.disabled = false;
 }
 
 // Pause Stopwatch -------------------------------------------------------------------------------
@@ -52,7 +84,7 @@ function pauseStopwatch() {
     clearInterval(timeInterval);
     isRunning = false;
     startButton.textContent = "Start";
-    resetButton.disabled = timeElapsed <=0;
+    resetButton.disabled = timeElapsed <= 0;
 }
 
 // Reset Stopwatch -------------------------------------------------------------------------------
@@ -66,16 +98,16 @@ function resetStopwatch() {
 }
 
 // Button Handlers -------------------------------------------------------------------------------
-startButton.addEventListener('click', ()=>{
-    if(isRunning){
+startButton.addEventListener('click', () => {
+    if (isRunning) {
         pauseStopwatch();
     } else {
         startStopwatch();
     }
 });
 
-resetButton.addEventListener('click', ()=>{
-    if (!isRunning || timeElapsed > 0){
+resetButton.addEventListener('click', () => {
+    if (!isRunning || timeElapsed > 0) {
         resetStopwatch();
     }
 })
@@ -191,21 +223,20 @@ function convertDateToWords(date) {
 }
 
 // Update Clock -----------------------------------------------------------------
-function updateClock()
-{
+function updateClock() {
     const now = new Date();
     const seconds = now.getSeconds();
     const percent = (seconds / 60) * 100;
     const newTime = convertTimeToWords(now);
-    if(timeLabel.innerText !== newTime) {
+    if (timeLabel.innerText !== newTime) {
         fadeLabelText(timeLabel, newTime);
     }
     const newDate = convertDateToWords(now);
-    if(dateLabel.innerText !== newDate) {
+    if (dateLabel.innerText !== newDate) {
         fadeLabelText(dateLabel, newDate);
     }
     const newWeek = getWeekNumberWords(now)
-    if(weekLabel.innerText !== newWeek) {
+    if (weekLabel.innerText !== newWeek) {
         fadeLabelText(weekLabel, newWeek);
     }
     secondsBar.style.width = `${percent}%`;

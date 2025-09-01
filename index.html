@@ -1,18 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Word Clock</title>
     <link href="styles.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="seconds-bar"></div>
-<div class = "date-container">
-    <h1 id="date" class="date">Date</h1>
-    <h1 id="week" class="week">Week</h1>
+<div id="top-bar">
+    <div class="date-container">
+        <h1 id="date" class="date">Date</h1>
+        <h1 id="week" class="week">Week</h1>
+    </div>
+    <div class="settings-wrapper">
+        <button id="settings" class="button">Settings</button>
+        <div id="settings-panel" class="settings-panel">
+            <h2>Settings</h2>
+            <label for="font-select">Choose Font:</label>
+            <select id="font-select">
+                <option value="Lexend">Normal</option>
+                <option value="Roboto Condensed">Roboto</option>
+                <option value="Google Sans Code">Code</option>
+                <option value="Permanent Marker">Permanent Marker</option>
+                <option value="Monsieur La Doulaise">Fancy</option>
+            </select>
+            <label for="theme-select">Choose Theme:</label>
+            <select id="theme-select">
+                <option value="Dark">Dark</option>
+                <option value="Light">Light</option>
+            </select>
+        </div>
+    </div>
 </div>
-<div class = "time-container">
+<div class="time-container">
     <h1 id="time" class="time fade">Time</h1>
 </div>
 <div class="Stopwatch-container">

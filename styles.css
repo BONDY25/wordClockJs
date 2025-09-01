@@ -1,4 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Lexend:wght@100..900&family=Monsieur+La+Doulaise&family=Permanent+Marker&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ======================================================================= */
+/* Defaults */
+/* ======================================================================= */
+
+:root {
+    --defFont: 'Lexend', sans-serif;
+    --bgColor: black;
+    --fontColor: white;
+}
+
+/* ======================================================================= */
+/* Main Content & General Theme */
+/* ======================================================================= */
 
 * {
     margin: 0;
@@ -7,11 +21,11 @@
 }
 
 body {
-    background-color: black;
-    font-family: Lexend, sans-serif;
-    color: white;
+    background-color: var(--bgColor);
+    color: var(--fontColor);
     height: 100vh;
     display: flex;
+    font-family: var(--defFont), sans-serif;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -25,13 +39,23 @@ body {
     left: 0;
     height: 5px;
     background: white;
-    width: 0%;
+    width: 0;
     transition: width 1s linear;
+}
+
+/* Top bar container */
+#top-bar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between; /* pushes children apart */
+    align-items: center;
 }
 
 /* Date in top-left */
 .date-container {
-    position: absolute;
     top: 20px;
     left: 20px;
     font-size: 10px;
@@ -44,6 +68,7 @@ body {
     padding: 20px;
 }
 
+/* Fade Effects */
 .fade {
     opacity: 1;
     transition: opacity 1s ease-in-out;
@@ -52,6 +77,66 @@ body {
 .fade.fade-out {
     opacity: 0;
 }
+
+/* ======================================================================= */
+/* General Buttons */
+/* ======================================================================= */
+
+/* General button styling */
+.button {
+    font-size: 16px;
+    padding: 8px 16px;
+    border: 2px var(--fontColor) solid;
+    border-radius: 8px;
+    font-family: var(--defFont), sans-serif;
+    cursor: pointer;
+    background-color: var(--bgColor);
+    color: var(--fontColor);
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Hover effect */
+.button:hover {
+    background-color: var(--fontColor);
+    color: var(--bgColor);
+}
+
+/* ======================================================================= */
+/* Stop watch */
+/* ======================================================================= */
+
+/* Start button */
+#start {
+    background-color: var(--bgColor);
+    color: var(--fontColor);
+}
+
+/* Pause button */
+#reset {
+    background-color: var(--bgColor);
+    color: var(--fontColor);
+}
+
+/* button hover */
+#start:hover {
+    background-color: limegreen;
+    color: black;
+    border: 2px limegreen solid;
+}
+
+#reset:hover {
+    background-color: red;
+    color: black;
+    border: 2px red solid;
+}
+
+/* button group */
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
 /* Container styling */
 .Stopwatch-container {
     display: flex;
@@ -59,9 +144,10 @@ body {
     align-items: center;
     justify-content: center;
     margin-top: 40px;
-    font-family: Lexend, sans-serif;
+    font-family: var(--defFont), sans-serif;
     padding: 20px;
-    background-color: black;
+    background-color: var(--bgColor);
+    color: var(--fontColor);
     border-radius: 12px;
     margin-left: auto;
     margin-right: auto;
@@ -80,43 +166,65 @@ body {
     padding: 10px 24px;
     margin: 5px;
     width: 150px;
-    border: 2px solid white;
+    border: 2px var(--fontColor) solid;
     border-radius: 8px;
-    font-family: Lexend, sans-serif;
+    font-family: var(--defFont), sans-serif;
     cursor: pointer;
-    background-color: transparent;
-    color: white;
+    background-color: var(--bgColor);
+    color: var(--fontColor);
     transition: background-color 0.2s ease-in-out;
 }
 
+/* ======================================================================= */
+/* Setting Panel */
+/* ======================================================================= */
 
-/* Start button */
-#start {
-    background-color: black;
+/* Setting Panel */
+.settings-panel {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #111;
     color: white;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
 }
 
-#start:hover {
-    background-color: limegreen;
-    color: black;
-
+.settings-panel.open {
+    right: 0;
 }
 
-/* Pause button */
-#reset {
-    background-color: black;
+/* Settings wrapper is aligned on the right in the top-bar */
+.settings-wrapper {
+    position: relative;
+}
+
+/* Button stays in place */
+#settings {
+    z-index: 1100; /* make sure it stays above panel */
+}
+
+.settings-wrapper.open #settings {
+    transform: translateX(-300px); /* push button left same as panel width */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Font dropdown styling */
+.settings-panel select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: black;
     color: white;
+    border: 1px solid white;
+    border-radius: 6px;
 }
 
-#reset:hover {
-    background-color: red;
-    color: black;
-}
 
-.button-group {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
+
 
 
