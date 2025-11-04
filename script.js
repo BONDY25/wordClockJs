@@ -34,9 +34,11 @@ themeSelect.addEventListener('change', (e) => {
     if (e.target.value === "Light") {
         document.documentElement.style.setProperty("--bgColor", "white");
         document.documentElement.style.setProperty("--fontColor", "black");
+        secondsBar.style.background = "Black"
     } else {
         document.documentElement.style.setProperty("--bgColor", "black");
         document.documentElement.style.setProperty("--fontColor", "white");
+        secondsBar.style.background = "White"
     }
 });
 
