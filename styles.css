@@ -81,6 +81,49 @@ body {
     opacity: 0;
 }
 
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+}
+
+.time-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 60px; /* spacing above stopwatch */
+}
+
+.analog-solid {
+    opacity: 1;
+    z-index: 10;
+    position: relative;
+}
+
+.analog-background {
+    opacity: 0.3;
+    z-index: 0;
+    position: absolute;
+}
+
+.analog-hidden {
+    opacity: 0;
+}
+
+#top-bar {
+    /*position: relative;*/
+    z-index: 3; /* ensures it’s above the main container */
+}
+
+.main-container {
+    position: relative;
+    z-index: 1; /* keeps it below top bar elements */
+}
+
+
+
 /* ======================================================================= */
 /* General Buttons */
 /* ======================================================================= */
@@ -185,6 +228,39 @@ body {
 }
 
 /* ======================================================================= */
+/* Analog Clock */
+/* ======================================================================= */
+
+#analog-clock {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+    background: transparent;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.analog-background {
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.analog-solid {
+    opacity: 1;
+    z-index: 10;
+}
+
+.analog-hidden {
+    opacity: 0;
+}
+
+
+/* ======================================================================= */
 /* Setting Panel */
 /* ======================================================================= */
 
@@ -232,6 +308,8 @@ body {
     border: 1px solid white;
     border-radius: 6px;
 }
+
+
 
 
 

@@ -30,19 +30,29 @@
                 <option value="Dark">Dark</option>
                 <option value="Light">Light</option>
             </select>
+            <label for="clock-mode-select">Analog Clock:</label>
+            <select id="clock-mode-select">
+                <option value="none">None</option>
+                <option value="background">Background</option>
+                <option value="solid">Solid</option>
+            </select>
         </div>
     </div>
 </div>
-<div class="time-container">
-    <h1 id="time" class="time fade">Time</h1>
-</div>
-<div class="Stopwatch-container">
-    <h1 id="stopwatch" class="stopwatch">Press Start</h1>
-    <div class="button-group">
-        <button id="start" class="start">Start</button>
-        <button id="reset" class="reset" disabled>Reset</button>
+<div class="main-container">
+    <div class="time-container">
+        <canvas id="analog-clock"></canvas>
+        <h1 id="time" class="time fade">Time</h1>
+    </div>
+    <div class="Stopwatch-container">
+        <h1 id="stopwatch" class="stopwatch">Press Start</h1>
+        <div class="button-group">
+            <button id="start" class="start">Start</button>
+            <button id="reset" class="reset" disabled>Reset</button>
+        </div>
     </div>
 </div>
+
 <script src="./script.js"></script>
 </body>
 </html>

@@ -10,6 +10,10 @@ const settingsBtn = document.getElementById('settings');
 const settingsPanel = document.getElementById('settings-panel');
 const fontSelect = document.getElementById('font-select');
 const themeSelect = document.getElementById('theme-select');
+const analogClock = document.getElementById('analog-clock');
+const clockModeSelect = document.getElementById('clock-mode-select');
+
+let clockMode = 'none';
 
 // =========================================================================================
 // Settings Panel
@@ -115,7 +119,119 @@ resetButton.addEventListener('click', () => {
 })
 
 // =========================================================================================
-// Clock Functions
+// Analog Clock Functions
+// =========================================================================================
+
+// Event Listener for mode change -------------------------------------------------------------------------------
+clockModeSelect.addEventListener('change', (e) => {
+    clockMode = e.target.value;
+    updateClockVisibility();
+});
+
+// Update Clock Visibility -------------------------------------------------------------------------------
+function updateClockVisibility() {
+    analogClock.classList.remove('analog-background', 'analog-solid', 'analog-hidden');
+    timeLabel.style.display = 'block';
+
+    if (clockMode === 'background') {
+        analogClock.classList.add('analog-background');
+    } else if (clockMode === 'solid') {
+        analogClock.classList.add('analog-solid');
+        timeLabel.style.display = 'none';
+    } else {
+        analogClock.classList.add('analog-hidden');
+    }
+}
+
+// Draw Clock -------------------------------------------------------------------------------
+function drawAnalogClock() {
+    const ctx = analogClock.getContext('2d');
+    const radius = analogClock.width / 2;
+    ctx.clearRect(0, 0, analogClock.width, analogClock.height);
+    ctx.save();
+    ctx.translate(radius, radius);
+    ctx.rotate(-Math.PI / 2);
+
+    const now = new Date();
+    const hour = now.getHours() % 12;
+    const minute = now.getMinutes();
+    const second = now.getSeconds();
+
+    // Clock face
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--fontColor');
+    ctx.beginPath();
+    ctx.arc(0, 0, radius - 10, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Hour marks
+    ctx.lineWidth = 4;
+    for (let i = 0; i < 12; i++) {
+        ctx.beginPath();
+        ctx.rotate(Math.PI / 6);
+        ctx.moveTo(radius - 20, 0);
+        ctx.lineTo(radius - 10, 0);
+        ctx.stroke();
+    }
+
+    // Minute marks
+    ctx.lineWidth = 2;
+    for (let i = 0; i < 60; i++) {
+        if (i % 5 !== 0) {
+            ctx.beginPath();
+            ctx.moveTo(radius - 15, 0);
+            ctx.lineTo(radius - 10, 0);
+            ctx.stroke();
+        }
+        ctx.rotate(Math.PI / 30);
+    }
+
+    ctx.save();
+
+    // Hour hand
+    ctx.rotate((Math.PI / 6) * (hour + minute / 60 + second / 3600));
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.moveTo(-10, 0);
+    ctx.lineTo(radius * 0.5, 0);
+    ctx.stroke();
+    ctx.restore();
+
+    // Minute hand
+    ctx.save();
+    ctx.rotate((Math.PI / 30) * (minute + second / 60));
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(-15, 0);
+    ctx.lineTo(radius * 0.75, 0);
+    ctx.stroke();
+    ctx.restore();
+
+    // Second hand
+    ctx.save();
+    ctx.strokeStyle = 'red';
+    ctx.rotate((Math.PI / 30) * second);
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(-20, 0);
+    ctx.lineTo(radius * 0.85, 0);
+    ctx.stroke();
+    ctx.restore();
+
+    ctx.restore();
+}
+
+function resizeClock() {
+    const size = Math.min(window.innerWidth, window.innerHeight) * 0.4;
+    analogClock.width = size;
+    analogClock.height = size;
+}
+resizeClock();
+window.addEventListener('resize', resizeClock);
+
+
+// =========================================================================================
+// Word Clock Functions
 // =========================================================================================
 
 // Convert Time to words --------------------------------------------------------------------------------
@@ -226,6 +342,10 @@ function convertDateToWords(date) {
 
 // Update Clock -----------------------------------------------------------------
 function updateClock() {
+
+    if (clockMode !== 'none') {
+        drawAnalogClock();
+    }
     const now = new Date();
     const seconds = now.getSeconds();
     const percent = (seconds / 60) * 100;
